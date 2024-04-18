@@ -20,6 +20,7 @@ class _CarFormPageState extends State<CarFormPage> {
   final TextEditingController _yearController = TextEditingController();
   final TextEditingController _colorController = TextEditingController();
   int _id = GarageService.instance.nextID();
+  Car? car;
 
   @override
   void initState() {
@@ -27,14 +28,14 @@ class _CarFormPageState extends State<CarFormPage> {
     Future.delayed(Duration.zero, () {
       if (ModalRoute.of(context) != null &&
           ModalRoute.of(context)!.settings.arguments != null) {
-        Car car = ModalRoute.of(context)!.settings.arguments as Car;
+        car = ModalRoute.of(context)!.settings.arguments as Car;
         setState(() {
-          _modelController.text = car.model;
-          _brandController.text = car.brand;
-          _bannerController.text = car.banner;
-          _yearController.text = car.year;
-          _colorController.text = car.color;
-          _id = car.id;
+          _modelController.text = car!.model;
+          _brandController.text = car!.brand;
+          _bannerController.text = car!.banner;
+          _yearController.text = car!.year;
+          _colorController.text = car!.color;
+          _id = car!.id;
         });
       }
     });
@@ -44,7 +45,7 @@ class _CarFormPageState extends State<CarFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cadastro de Carros"),
+          title: Text(car != null ? car!.model : "Cadastro de Carros"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
