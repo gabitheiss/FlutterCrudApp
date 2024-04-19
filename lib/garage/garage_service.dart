@@ -27,5 +27,12 @@ class GarageService {
     }
   }
 
+  delete(Car car) {
+    var data = _cars.where((element) => element.banner == car.banner);
+    if (data.isNotEmpty) {
+      _cars.removeWhere((element) => element.banner == car.banner);
+    }
+  }
+
   List<Car> get cars => _cars;
 }

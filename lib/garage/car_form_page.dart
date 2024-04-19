@@ -102,27 +102,48 @@ class _CarFormPageState extends State<CarFormPage> {
                       }),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).primaryColor)),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Car car = Car(
-                                id: _id,
-                                banner: _bannerController.text,
-                                brand: _brandController.text,
-                                model: _modelController.text,
-                                color: _colorController.text,
-                                year: _yearController.text);
-                            GarageService.instance.save(car);
+                                Theme.of(context).primaryColor),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Car car = Car(
+                                  id: _id,
+                                  banner: _bannerController.text,
+                                  brand: _brandController.text,
+                                  model: _modelController.text,
+                                  color: _colorController.text,
+                                  year: _yearController.text);
+                              GarageService.instance.save(car);
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: const Text(
+                            "Salvar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        car != null ? ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Theme.of(context).primaryColor),
+                          ),
+                          onPressed: () {
+                            GarageService.instance.delete(car!);
                             Navigator.of(context).pop();
-                          }
-                        },
-                        child: const Text(
-                          "Salvar",
-                          style: TextStyle(color: Colors.white),
-                        )),
+                          },
+                          child: const Text(
+                            "Deletar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ) :  Container(),
+                      ],
+                    ),
                   )
                 ],
               ),
