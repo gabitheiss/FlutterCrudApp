@@ -1,3 +1,5 @@
+
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../model/book.dart';
@@ -46,7 +48,9 @@ class _CarsListPageState extends State<BooksListPage> {
                   _book = BooksService.instance.books;
                 });
               },
-              child: const Icon(Icons.delete, color: Colors.red),
+              child: const Icon(
+                  FluentIcons.delete_12_filled,
+                  color: Colors.red),
             ),
           );
         },
